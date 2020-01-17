@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div v-if="isWaiting">
-      <p>読み込み中</p>
+      <LoadingView />
     </div>
     <div v-else>
       <div v-if="!isLogin">
@@ -18,11 +18,13 @@
 import firebase from '@/plugins/firebase'
 import Chat from '~/components/chat.vue'
 import LoginView from '~/components/loginView.vue'
+import LoadingView from '~/components/loadingView.vue'
 
 export default {
   components: {
     Chat,
-    LoginView
+    LoginView,
+    LoadingView
   },
   asyncData () {
     return {
