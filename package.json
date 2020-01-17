@@ -11,7 +11,18 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/style-resources": "^1.0.0",
+    "babel-loader": "^8.0.6",
+    "cookie-parser": "^1.4.4",
+    "core-js": "2.6.9",
+    "firebase": "^7.7.0",
+    "node-sass": "^4.13.1",
+    "nuxt": "^2.0.0",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.41.5"
   },
   "devDependencies": {}
 }
