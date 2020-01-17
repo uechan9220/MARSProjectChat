@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   props: ["items"],
   methods: {

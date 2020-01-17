@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <div v-if="!isLogin">
-        <button @click="googleLogin">Googleでログイン</button>
+        <LoginView />
       </div>
       <div v-else>
         <Chat :items='user'/>
@@ -17,10 +17,12 @@
 <script>
 import firebase from '@/plugins/firebase'
 import Chat from '~/components/chat.vue'
+import LoginView from '~/components/loginView.vue'
 
 export default {
   components: {
-    Chat
+    Chat,
+    LoginView
   },
   asyncData () {
     return {
@@ -42,10 +44,6 @@ export default {
     })
   },
   methods: {
-    googleLogin () {
-      const provider = new firebase.auth.GoogleAuthProvider()
-      firebase.auth().signInWithRedirect(provider)
-    },
     logOut () {
       firebase.auth().signOut()
     },
