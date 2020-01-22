@@ -7,8 +7,9 @@
       <div v-if="!isLogin">
         <LoginView />
       </div>
-      <div v-else>
-        <Chat :items='user'/>
+      <div v-else class="chatFlex">
+        <ChatLeft :items='user' class="chatLeft"/>
+        <ChatRight :items='user' class="chatRight"/>
       </div>
     </div>
   </section>
@@ -16,13 +17,15 @@
 
 <script>
 import firebase from '@/plugins/firebase'
-import Chat from '~/components/chat.vue'
+import ChatLeft from '~/components/chat/chatLeft.vue'
+import ChatRight from '~/components/chat/chatRight.vue'
 import LoginView from '~/components/loginView.vue'
 import LoadingView from '~/components/loadingView.vue'
 
 export default {
   components: {
-    Chat,
+    ChatLeft,
+    ChatRight,
     LoginView,
     LoadingView
   },
@@ -55,3 +58,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.chat{
+  &Flex{
+    display: flex;
+    height: 100vh;
+  }
+  &Left{
+    flex-basis: 25%;
+  }
+  &Right{
+    flex-basis: 75%;
+  }
+}
+</style>

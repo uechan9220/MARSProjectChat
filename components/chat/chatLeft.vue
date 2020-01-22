@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chatLeftBackground">
     <div>
       <div class="accountBox">
         <img class="accountBoxImage" :src="items.photoURL" />
@@ -38,5 +38,9 @@ export default {
       border-radius: 50%;
     }
   }
+}
+
+.chatLeftBackground{
+  background-color: rgba($color: #ca3636, $alpha: 1.0)
 }
 </style>
