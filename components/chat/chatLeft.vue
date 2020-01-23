@@ -8,8 +8,10 @@
       </div>
     </div>
     <Rooms />
-    <div class="pink">
-      <button id="logoutButton" @click="logOut" class="logoutButton">ログアウト</button>
+    <div class="logoutButtonBox">
+      <button id="logoutButton" @click="logOut" class="logoutButton">
+        ログアウト
+      </button>
     </div>
     <!-- <button @click="hoge">aaaaaaaaaa</button> -->
   </div>
@@ -78,24 +80,13 @@ export default {
   background-color: rgba($color: #424549, $alpha: 1);
 }
 
-
 //////////////////////
 // logout Button Style
 //////////////////////
 button {
-  color: #454545;
-  background: transparent;
-  border-width: 2px;
   border-style: solid;
-  border-color: #454545;
-  position: relative;
-  margin: 1em;
   display: inline-block;
-  padding: 0.5em 1em;
-  transition: all 0.3s ease-in-out;
   text-align: center;
-  font-family: comfortaa;
-  font-weight: bold;
 }
 button:before,
 button:after {
@@ -134,7 +125,7 @@ button:hover {
 
 .logout {
   &Button {
-    width: 93%;
+    width: 100%;
     color: #eb1777;
     border-color: #eb1777;
     background: transparent;
@@ -153,14 +144,18 @@ button:hover {
     }
     &:hover {
       color: #fff;
-  background-color: #eb1777;
-  border-color: #eb1777;
+      background-color: #eb1777;
+      border-color: #eb1777;
       &:after {
         border-color: #eb1777;
       }
       &:before {
         border-color: #eb1777;
       }
+    }
+    &Box{
+      display: flex;
+      justify-content: center;
     }
   }
 }
