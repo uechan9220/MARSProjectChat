@@ -3,7 +3,7 @@
     <h1 class="roomsTitle">Rooms</h1>
     <!-- ここにv-forでroome情報を持ってくる様にする -->
     <div v-for="item in items" :key="item.id">
-      <h1 class="roomsText">{{item.name}}</h1>
+      <h1 @click='hoge' class="roomsText">{{item.name}}</h1>
     </div>
   </div>
 </template>
@@ -13,6 +13,12 @@ import firebase from "firebase";
 const db = firebase.firestore();
 
 export default {
+  methods: {
+    hoge(test) {
+      console.log(test.target.innerText)
+      this.$nuxt.$emit('hoge', test.target.innerText)
+    }
+  },
   data() {
     return {
       items: []
@@ -32,6 +38,7 @@ export default {
   &Text {
     color: #fff;
     margin: 1rem 0;
+    cursor: pointer;
   }
   &Box {
     display: flex;
