@@ -9,11 +9,8 @@
     </div>
     <Rooms />
     <div class="logoutButtonBox">
-      <button id="logoutButton" @click="logOut" class="logoutButton">
-        ログアウト
-      </button>
+      <button id="logoutButton" @click="logOut" class="logoutButton">ログアウト</button>
     </div>
-    <!-- <button @click="hoge">aaaaaaaaaa</button> -->
   </div>
 </template>
 
@@ -153,7 +150,7 @@ button:hover {
         border-color: #eb1777;
       }
     }
-    &Box{
+    &Box {
       display: flex;
       justify-content: center;
     }
