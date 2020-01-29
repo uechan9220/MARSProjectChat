@@ -1,6 +1,6 @@
 <template>
   <div class="roomsBox">
-    <h1 class="roomsTitle">Rooms</h1>
+    <h4 class="roomsTitle">-------Rooms-------</h4>
     <!-- ここにv-forでroome情報を持ってくる様にする -->
     <div v-for="item in items" :key="item.id">
       <h1 @click='hoge' class="roomsText">{{item.name}}</h1>

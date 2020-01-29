@@ -12,4 +12,4 @@ export default {
     LoadingView
   }
 }
-</script>
+</script>ima
