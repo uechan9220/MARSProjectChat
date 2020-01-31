@@ -46,15 +46,17 @@ export default {
           id: 1,
           name: "hoge"
         };
+
+        // ここいつか直したい
         db.collection("rooms")
           .doc(this.roomName)
-          .set(data) //ここのData入れたくない
+          .set(data)
           .then(res => {
             db.collection("rooms")
               .doc(this.roomName)
               .collection("Messages")
-              .doc(this.roomName) //ここもいれたくない
-              .set(data) //ここのDataもいれたくない
+              .doc(this.roomName)
+              .set(data)
               .catch(err => {
                 console.log(err);
               })
@@ -66,7 +68,7 @@ export default {
                   .delete()
                   .then(res => {
                     console.log(res);
-                    alert("くそ実装");
+                    alert("roomの追加が成功しました");
                   });
                 console.log(res);
               });
@@ -85,7 +87,7 @@ export default {
   },
   async mounted() {
     await db.collection("rooms").onSnapshot(querySnapshot => {
-      this.items = []
+      this.items = [];
       querySnapshot.forEach(doc => {
         this.items.push({ name: doc.id });
       });

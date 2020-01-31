@@ -1,5 +1,12 @@
 <template>
   <div class="chatRightBackground">
+    <div>
+      <div class="menuButton" tabindex="0">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </div>
+    </div>
     <div class="chatBox">
       <div v-for="data in datas" :key="data.id">
         <!-- 投稿したのが自分の時 -->
@@ -129,6 +136,38 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.menuButton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  width: 30px;
+  cursor: pointer;
+  pointer-events: auto;
+  margin-left: 25px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  height: 8vh;
+}
+.icon-bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #aaa;
+  transition: .3s;
+}
+.icon-bar + .icon-bar {
+  margin-top: 5px;
+}
+
+
+
 .chatRightBackground {
   background-color: rgba($color: #3676ca, $alpha: 1);
 }
@@ -140,6 +179,10 @@ export default {
     height: 90vh;
     background-color: #fff;
     overflow-y: auto;
+    @media screen and(max-width: 767px) {
+      margin: 0 0.5rem 0.5rem;
+      height: 83vh;
+    }
   }
   &User {
     &Box {
@@ -161,6 +204,7 @@ export default {
         color: #231815;
         border-radius: 12px;
         box-sizing: border-box;
+        max-width: 16rem;
         &:before {
           left: auto;
           right: -15px;
@@ -178,7 +222,7 @@ export default {
           border-bottom: 25px solid transparent;
         }
         /deep/p {
-          text-align: left
+          text-align: left;
         }
       }
     }
@@ -206,6 +250,7 @@ export default {
   }
   &Message {
     white-space: pre-wrap;
+    word-break: break-all;
     &Box {
       width: 100%;
       position: relative;
@@ -215,6 +260,7 @@ export default {
       color: #231815;
       border-radius: 12px;
       box-sizing: border-box;
+      max-width: 16rem;
       &:before {
         left: -15px;
         border-left: 25px solid #f2f3f7;
@@ -230,7 +276,7 @@ export default {
         border-right: 25px solid transparent;
         border-bottom: 25px solid transparent;
       }
-      /deep/p{
+      /deep/p {
         text-align: left;
       }
     }
