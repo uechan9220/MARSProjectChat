@@ -51,7 +51,6 @@ export default {
   &Title{
     color:#fff;
     margin: 1rem 0 0 0;
-    
   }
 }
 </style>
