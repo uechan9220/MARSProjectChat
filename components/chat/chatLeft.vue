@@ -48,7 +48,6 @@ export default {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     transform: translateX(-100%);
     transition: transform 0.3s;
-    will-change: transform;
     contain: paint;
     z-index:999;
   }

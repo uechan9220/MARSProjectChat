@@ -1,11 +1,12 @@
 <template>
   <div class="chatRightBackground">
-    <div>
+    <div class="menuBox showMenuBox" >
       <div class="menuButton" tabindex="0">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </div>
+      <p class="projectName">MARSProject</p>
     </div>
     <div class="chatBox">
       <div v-for="data in datas" :key="data.id">
@@ -136,6 +137,11 @@ export default {
 
 
 <style lang="scss" scoped>
+.showMenuBox{
+  @media screen and(min-width: 767px){
+    display: none!important
+  }
+}
 
 .menuButton {
   position: relative;
@@ -150,9 +156,9 @@ export default {
   width: 30px;
   cursor: pointer;
   pointer-events: auto;
-  margin-left: 25px;
+  margin-left: 1.6rem;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   height: 8vh;
 }
 .icon-bar {
@@ -160,16 +166,29 @@ export default {
   width: 100%;
   height: 3px;
   background: #aaa;
-  transition: .3s;
+  transition: 0.3s;
 }
 .icon-bar + .icon-bar {
   margin-top: 5px;
 }
 
-
+.menuBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .chatRightBackground {
   background-color: rgba($color: #3676ca, $alpha: 1);
+}
+
+.project {
+  &Name {
+    color: #fff;
+    margin-right: 1.5rem;
+    font-weight: bold;
+    font-size: 2rem;
+  }
 }
 
 .chat {

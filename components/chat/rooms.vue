@@ -110,6 +110,7 @@ export default {
     height: 90vh;
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
+    overflow-y: auto;
   }
   &Title {
     color: #fff;
