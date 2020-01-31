@@ -3,31 +3,92 @@
     <h4 class="roomsTitle">-------Rooms-------</h4>
     <!-- ここにv-forでroome情報を持ってくる様にする -->
     <div v-for="item in items" :key="item.id">
-      <h1 @click='hoge' class="roomsText">{{item.name}}</h1>
+      <h1 @click="hoge" class="roomsText">{{item.name}}</h1>
     </div>
+    <div>
+      <button @click="openModal">room Add</button>
+    </div>
+    <modal v-if="modal" @close="closeModal">
+      <p>追加するRoom名</p>
+      <div>
+        <input v-model="roomName" />
+      </div>
+      <template slot="footer">
+        <button @click="addRoom">追加</button>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
 const db = firebase.firestore();
+import modal from "~/components/chat/modal";
 
 export default {
+  components: {
+    modal
+  },
   methods: {
     hoge(test) {
-      console.log(test.target.innerText)
-      this.$nuxt.$emit('hoge', test.target.innerText)
+      console.log(test.target.innerText);
+      this.$nuxt.$emit("hoge", test.target.innerText);
+    },
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+    },
+    addRoom() {
+      if (this.roomName.length > 0) {
+        let data = {
+          id: 1,
+          name: "hoge"
+        };
+        db.collection("rooms")
+          .doc(this.roomName)
+          .set(data) //ここのData入れたくない
+          .then(res => {
+            db.collection("rooms")
+              .doc(this.roomName)
+              .collection("Messages")
+              .doc(this.roomName) //ここもいれたくない
+              .set(data) //ここのDataもいれたくない
+              .catch(err => {
+                console.log(err);
+              })
+              .then(res => {
+                db.collection("rooms")
+                  .doc(this.roomName)
+                  .collection("Messages")
+                  .doc(this.roomName)
+                  .delete()
+                  .then(res => {
+                    console.log(res);
+                    alert("くそ実装");
+                  });
+                console.log(res);
+              });
+          });
+      } else {
+        alert("Room名を入力してください");
+      }
     }
   },
   data() {
     return {
-      items: []
+      items: [],
+      modal: false,
+      roomName: ""
     };
   },
   async mounted() {
-    const res = await db.collection("rooms").get();
-    res.forEach(doc => {
-      this.items.push({ name: doc.id });
+    await db.collection("rooms").onSnapshot(querySnapshot => {
+      this.items = []
+      querySnapshot.forEach(doc => {
+        this.items.push({ name: doc.id });
+      });
     });
   }
 };
@@ -48,8 +109,8 @@ export default {
     border-top: 2px solid #fff;
     border-bottom: 2px solid #fff;
   }
-  &Title{
-    color:#fff;
+  &Title {
+    color: #fff;
     margin: 1rem 0 0 0;
   }
 }

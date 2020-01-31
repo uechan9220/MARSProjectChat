@@ -143,13 +143,11 @@ export default {
   }
   &User {
     &Box {
-      align-items: center;
       display: flex;
     }
   }
   &MyUser {
     &Box {
-      align-items: center;
       display: flex;
       justify-content: flex-end;
     }
@@ -179,6 +177,9 @@ export default {
           border-right: 25px solid transparent;
           border-bottom: 25px solid transparent;
         }
+        /deep/p {
+          text-align: left
+        }
       }
     }
   }
@@ -186,7 +187,7 @@ export default {
     &And {
       &Text {
         &Box {
-          margin: 2rem 0;
+          margin: 1rem 0;
           &Right {
             display: flex;
             flex-direction: column;
@@ -228,6 +229,9 @@ export default {
         top: 10px;
         border-right: 25px solid transparent;
         border-bottom: 25px solid transparent;
+      }
+      /deep/p{
+        text-align: left;
       }
     }
   }
