@@ -1,6 +1,6 @@
 <template>
   <div class="chatRightBackground">
-    <div class="menuBox showMenuBox" >
+    <div class="menuBox showMenuBox">
       <div class="menuButton" tabindex="0">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -112,9 +112,13 @@ export default {
         .orderBy("timestamp", "asc")
         .get()
         .then(res => {
-          res.forEach(doc => {
-            this.datas.push(doc.data());
-          });
+          if (res.docs.length != 0) {
+            res.forEach(doc => {
+              this.datas.push(doc.data());
+            });
+          }else{
+            this.datas.push({message: "まだ書き込みはない様です。", name: "System Manager", photoURL: ""})
+          }
         });
     });
   },
@@ -137,9 +141,9 @@ export default {
 
 
 <style lang="scss" scoped>
-.showMenuBox{
-  @media screen and(min-width: 767px){
-    display: none!important
+.showMenuBox {
+  @media screen and(min-width: 767px) {
+    display: none !important;
   }
 }
 
