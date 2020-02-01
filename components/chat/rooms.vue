@@ -5,8 +5,8 @@
     <div v-for="item in items" :key="item.id">
       <h1 @click="hoge" class="roomsText">{{item.name}}</h1>
     </div>
-    <div>
-      <button @click="openModal">room Add</button>
+    <div class="addButtonBox">
+      <button class="addButtonStyle" @click="openModal">room Add</button>
     </div>
     <modal v-if="modal" @close="closeModal">
       <p>追加するRoom名</p>
@@ -115,6 +115,65 @@ export default {
   &Title {
     color: #fff;
     margin: 1rem 0 0 0;
+  }
+}
+
+.add {
+  &Button {
+    &Box {
+      height: 100%;
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      align-items: flex-end;
+    }
+    &Style {
+      width: 100%;
+      background: #1aab8a;
+      color: #fff;
+      border: none;
+      position: relative;
+      font-size: 1rem;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      transition: 800ms ease all;
+      outline: none;
+      &:hover {
+        background: #fff;
+        color: #1aab8a;
+      }
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #1aab8a;
+        transition: 400ms ease all;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 2px;
+        width: 0;
+        background: #1aab8a;
+        transition: 400ms ease all;
+        right: inherit;
+        top: inherit;
+        left: 0;
+        bottom: 0;
+      }
+      &:hover {
+        &:after,
+        &:before {
+          width: 100%;
+          transition: 800ms ease all;
+        }
+      }
+    }
   }
 }
 </style>

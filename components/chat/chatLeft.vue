@@ -1,5 +1,5 @@
 <template>
-  <div class="chatLeftBackground chatLeft" id="nav-content" tabindex="0">
+  <div class="chatLeftBackground chatLeft">
     <div class="accountBox">
       <img class="accountBoxImage" :src="items.photoURL" />
       <div class="accountTextBox">
@@ -35,24 +35,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#nav-content {
-  @media screen and(max-width: 767px) {
-    width: 100%;
-    max-width: 300px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    pointer-events: auto;
-    background-color: rgba($color: #424549, $alpha: 1);
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-    contain: paint;
-    z-index:999;
-  }
-}
-
 .account {
   &Box {
     display: flex;
