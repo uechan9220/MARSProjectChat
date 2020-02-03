@@ -7,9 +7,20 @@
       <div v-if="!isLogin">
         <LoginView />
       </div>
-      <div v-else class="chatFlex" id="nav-container">
-        <ChatLeft :items="user" class="chatLeft" />
-        <ChatRight :items="user" class="chatRight" />
+      <div v-else id="nav-container">
+        <div class="chatFlex pcMedia">
+          <ChatLeft :items="user" class="chatLeft" />
+          <ChatRight :items="user" class="chatRight" />
+        </div>
+        <div class="spMedia">
+          <div>
+            <spHeader />
+          </div>
+          <div class="chatFlex">
+            <ChatLeft :items="user" class="chatLeft" />
+            <ChatRight :items="user" class="chatRight" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -21,13 +32,15 @@ import ChatLeft from "~/components/chat/chatLeft.vue";
 import ChatRight from "~/components/chat/chatRight.vue";
 import LoginView from "~/components/loginView.vue";
 import LoadingView from "~/components/loadingView.vue";
+import spHeader from '~/components/chat/spHeader.vue';
 
 export default {
   components: {
     ChatLeft,
     ChatRight,
     LoginView,
-    LoadingView
+    LoadingView,
+    spHeader
   },
   asyncData() {
     return {
@@ -115,5 +128,15 @@ export default {
 #nav-container:focus-within #nav-content {
   transform: none;
 }
+.pcMedia {
+  @media screen and(max-width:767px) {
+    display: none;
+  }
+}
 
+.spMedia {
+  @media screen and(min-width:766px) {
+    display: flex;
+  }
+}
 </style>

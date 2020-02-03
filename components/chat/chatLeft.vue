@@ -66,6 +66,9 @@ export default {
 
 .chat {
   &Left {
+    @media screen and(max-width:767px){
+      height: 95vh;
+    }
     height: 100vh;
     display: flex;
     flex-direction: column;

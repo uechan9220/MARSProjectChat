@@ -1,13 +1,5 @@
 <template>
   <div class="chatRightBackground">
-    <div class="menuBox showMenuBox">
-      <div class="menuButton" tabindex="0">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </div>
-      <p class="projectName">MARSProject</p>
-    </div>
     <div class="chatBox">
       <div v-for="data in datas" :key="data.id">
         <!-- 投稿したのが自分の時 -->
@@ -141,11 +133,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.showMenuBox {
-  @media screen and(min-width: 767px) {
-    display: none !important;
-  }
-}
 
 .menuButton {
   position: relative;
@@ -202,9 +189,8 @@ export default {
     height: 90vh;
     background-color: #fff;
     overflow-y: auto;
-    @media screen and(max-width: 767px) {
-      margin: 0 0.5rem 0.5rem;
-      height: 83vh;
+    @media screen and(max-width:767px){
+      height: 85vh;
     }
   }
   &User {
