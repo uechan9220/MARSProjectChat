@@ -37,7 +37,7 @@
     </div>
     <div v-if="roomeName != ''" class="pushMessageBox">
       <textarea type="text" v-model="message" class="pushMessageInput" />
-      <button @click="pushMessage">投稿</button>
+      <button @click="pushMessage" class="addMessageButtonStyle">投稿</button>
     </div>
   </div>
 </template>
@@ -190,7 +190,7 @@ export default {
     background-color: #fff;
     overflow-y: auto;
     @media screen and(max-width:767px){
-      height: 85vh;
+      height: 83vh;
     }
   }
   &User {
@@ -315,5 +315,9 @@ export default {
 
 /deep/textarea {
   resize: none;
+}
+
+.addMessageButtonStyle{
+  background-color: #fff;
 }
 </style>

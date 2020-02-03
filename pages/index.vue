@@ -14,10 +14,9 @@
         </div>
         <div class="spMedia">
           <div>
-            <spHeader />
+            <spHeader :items="user" />
           </div>
           <div class="chatFlex">
-            <ChatLeft :items="user" class="chatLeft" />
             <ChatRight :items="user" class="chatRight" />
           </div>
         </div>
@@ -79,13 +78,13 @@ export default {
     height: 100vh;
   }
   &Left {
-    @media screen and(max-width: 766px) {
+    @media screen and(max-width: 768px) {
       flex-basis: none;
     }
     flex-basis: 25%;
   }
   &Right {
-    @media screen and(min-width: 766px) {
+    @media screen and(min-width: 768px) {
       flex-basis: 75%;
     }
     width: 100vw;
@@ -135,7 +134,7 @@ export default {
 }
 
 .spMedia {
-  @media screen and(min-width:766px) {
+  @media screen and(min-width:768px) {
     display: flex;
   }
 }

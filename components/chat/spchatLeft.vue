@@ -40,10 +40,12 @@ export default {
     height: 95vh;
     position: fixed;
     left: 0;
-    width: 250px;
-    margin-top: 24.4rem;
-    transform: translateX(-250px);
+    width: 100vw;
+    top: 0;
+    margin-top: 6vh;
+    transform: translateX(-105%);
     transition: transform 250ms ease-in-out;
+    z-index: 9;
   }
 }
 
@@ -78,13 +80,13 @@ export default {
 
 .chat {
   &Left {
-    @media screen and(max-width:767px) {
-      height: 95vh;
-    }
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @media screen and(min-width: 768px) {
+      display: none;
+    }
   }
 }
 
