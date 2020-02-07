@@ -33,7 +33,7 @@
   }
 
   &-content {
-    padding: 3rem 2rem 0rem 2rem;
+    padding: 10px 15px;
   }
 
   &-footer {
