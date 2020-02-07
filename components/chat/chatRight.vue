@@ -4,10 +4,19 @@
       <div v-for="data in datas" :key="data.id">
         <!-- 投稿したのが自分の時 -->
         <div v-if="data.name == items.displayName" class="chatMyUserBox chatUserBox">
-          <div class="chatNameAndTextBox chatNameAndTextBoxRight">
-            <p class="accountBoxText">{{ data.name }}</p>
-            <div class="chatMyUserMessageBox">
-              <p class="chatMessage">{{ data.message }}</p>
+          <!-- stampの場合 -->
+          <div v-if="data.stampFlag == 1">
+            <div class="chatNameAndTextBox chatNameAndTextBoxRight">
+              <img :src="data.stamp" />
+            </div>
+          </div>
+          <!-- stampじゃない場合 -->
+          <div v-else>
+            <div class="chatNameAndTextBox chatNameAndTextBoxRight">
+              <p class="accountBoxText">{{ data.name }}</p>
+              <div class="chatMyUserMessageBox">
+                <p class="chatMessage">{{ data.message }}</p>
+              </div>
             </div>
           </div>
           <div v-if="data.photoURL ==  ''">
@@ -26,10 +35,19 @@
           <div v-else>
             <img :src="data.photoURL" />
           </div>
-          <div class="chatNameAndTextBox chatNameAndTextBoxLeft">
-            <p class="accountBoxText">{{ data.name }}</p>
-            <div class="chatMessageBox">
-              <p class="chatMessage">{{ data.message }}</p>
+          <!-- stampの場合 -->
+          <div v-if="data.stampFlag == 1">
+            <div class="chatNameAndTextBox chatNameAndTextBoxLeft">
+              <img :src="data.stamp" />
+            </div>
+          </div>
+          <!-- stampじゃない場合 -->
+          <div v-else>
+            <div class="chatNameAndTextBox chatNameAndTextBoxLeft">
+              <p class="accountBoxText">{{ data.name }}</p>
+              <div class="chatMessageBox">
+                <p class="chatMessage">{{ data.message }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -37,19 +55,13 @@
     </div>
     <div v-if="roomeName != ''" class="pushMessageBox">
       <div>
-        <button  @click="openStampModal">スタンプ</button>
+        <button @click="openStampModal">スタンプ</button>
         <stampModal v-if="stampModal" @close="closeStampModal">
-          <h1>hoge</h1>
-          <div>
-            
+          <div class="stampBox">
+            <div v-for="(item, index) in icons" :key="index">
+              <img @click="pushStamp" :src="item.stamp" class="stampStyle" />
+            </div>
           </div>
-          <!-- <p>追加するRoom名</p>
-          <div>
-            <input v-model="roomName" />
-          </div>
-          <template slot="footer">
-            <button @click="addRoom">追加</button>
-          </template> -->
         </stampModal>
       </div>
       <textarea type="text" v-model="message" class="pushMessageInput" />
@@ -65,6 +77,11 @@ import firebase from "firebase";
 const db = firebase.firestore();
 
 import stampModal from "~/components/chat/stampModal";
+import stamp01 from "@/assets/images/stamp/stamp01.png";
+import stamp02 from "@/assets/images/stamp/stamp02.png";
+import stamp03 from "@/assets/images/stamp/stamp03.png";
+import stamp04 from "@/assets/images/stamp/stamp04.png";
+import stamp05 from "@/assets/images/stamp/stamp05.png";
 
 export default {
   components: {
@@ -76,16 +93,55 @@ export default {
       roomid: this.$route.params.roomid,
       message: "",
       roomeName: "",
-      stampModal: false
+      stampModal: false,
+      icons: [
+        { stamp: stamp01 },
+        { stamp: stamp02 },
+        { stamp: stamp03 },
+        { stamp: stamp04 },
+        { stamp: stamp05 }
+      ]
     };
   },
   props: ["items"],
   methods: {
-    openStampModal(){
-      this.stampModal = true
+    openStampModal() {
+      this.stampModal = true;
     },
-    closeStampModal(){
-      this.stampModal = false
+    closeStampModal() {
+      this.stampModal = false;
+    },
+    pushStamp(event) {
+      console.log(event.target.src);
+      db.collection("rooms")
+        .doc(this.roomeName)
+        .collection("messages")
+        .add({
+          name: this.items.displayName,
+          message: "",
+          photoURL: this.items.photoURL,
+          timestamp: new Date(),
+          stamp: event.target.src,
+          stampFlag: 1
+        })
+        .catch(err => {
+          console.llg(err);
+        })
+        .then(
+          (this.message = ""),
+          (this.datas = []),
+          db
+            .collection("rooms")
+            .doc(this.roomeName)
+            .collection("messages")
+            .orderBy("timestamp", "asc")
+            .get()
+            .then(res => {
+              res.forEach(doc => {
+                this.datas.push(doc.data());
+              });
+            })
+        );
     },
     pushMessage() {
       if (this.message != "") {
@@ -97,7 +153,8 @@ export default {
             message: this.message,
             photoURL: this.items.photoURL,
             timestamp: new Date(),
-            imgFlag: 0
+            stamp: "",
+            stampFlag: 0
           })
           .catch(err => {
             console.llg(err);
@@ -166,6 +223,19 @@ export default {
 
 
 <style lang="scss" scoped>
+.stamp {
+  &Box {
+    display: flex;
+  }
+  &Style {
+    transition-duration: 0.3s;
+    &:hover {
+      transform: scale(1.1);
+      transition-duration: 0.3s;
+    }
+  }
+}
+
 .menuButton {
   position: relative;
   display: flex;
