@@ -29,11 +29,11 @@
     background: #fff;
     border-radius: 4px;
     overflow: hidden;
-    margin-bottom: 9vh
+    margin-bottom: 9vh;
   }
 
   &-content {
-    padding: 10px 20px;
+    padding: 3rem 2rem 0rem 2rem;
   }
 
   &-footer {

@@ -37,11 +37,10 @@
   }
 
   &-content {
-    padding: 10px 20px;
+    padding: 3rem 2rem 0rem 2rem;
   }
 
   &-footer {
-    background: #ccc;
     padding: 10px;
     text-align: right;
   }
