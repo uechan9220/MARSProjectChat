@@ -14,7 +14,7 @@
 .stampModal {
   &.stampModal-overlay {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     position: fixed;
     z-index: 30;
@@ -29,6 +29,7 @@
     background: #fff;
     border-radius: 4px;
     overflow: hidden;
+    margin-bottom: 9vh
   }
 
   &-content {

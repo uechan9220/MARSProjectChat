@@ -7,7 +7,7 @@
           <!-- stampの場合 -->
           <div v-if="data.stampFlag == 1">
             <div class="chatNameAndTextBox chatNameAndTextBoxRight">
-              <img :src="data.stamp" />
+              <img :src="data.stamp" class="stamp" />
             </div>
           </div>
           <!-- stampじゃない場合 -->
@@ -38,7 +38,7 @@
           <!-- stampの場合 -->
           <div v-if="data.stampFlag == 1">
             <div class="chatNameAndTextBox chatNameAndTextBoxLeft">
-              <img :src="data.stamp" />
+              <img :src="data.stamp" class="stamp" />
             </div>
           </div>
           <!-- stampじゃない場合 -->
@@ -55,7 +55,7 @@
     </div>
     <div v-if="roomeName != ''" class="pushMessageBox">
       <div>
-        <button @click="openStampModal">スタンプ</button>
+        <button class="stampButton" @click="openStampModal">スタンプ</button>
         <stampModal v-if="stampModal" @close="closeStampModal">
           <div class="stampBox">
             <div v-for="(item, index) in icons" :key="index">
@@ -223,15 +223,63 @@ export default {
 
 
 <style lang="scss" scoped>
+$color: #1aab8a;
+
+@keyframes sheen {
+  0% {
+    transform: skewY(-45deg) translateX(0);
+  }
+  100% {
+    transform: skewY(-45deg) translateX(12.5em);
+  }
+}
 .stamp {
+  max-width: 12rem;
+  max-height: 12rem;
+  border-radius: inherit;
   &Box {
     display: flex;
+    flex-wrap: wrap;
   }
   &Style {
     transition-duration: 0.3s;
     &:hover {
       transform: scale(1.1);
       transition-duration: 0.3s;
+    }
+  }
+  &Button {
+    height: 100%;
+    padding: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: $color;
+    border: 2px solid $color;
+    display: inline-block;
+    border-radius: 0.3em;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    &:before {
+      content: "";
+      background-color: rgba(255, 255, 255, 0.5);
+      height: 100%;
+      width: 3em;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -4.5em;
+      transform: skewX(-45deg) translateX(0);
+      transition: none;
+    }
+    &:hover {
+      background-color: $color;
+      color: #fff;
+      border-bottom: 4px solid darken($color, 10%);
+      &:before {
+        transform: skewX(-45deg) translateX(13.5em);
+        transition: all 0.5s ease-in-out;
+      }
     }
   }
 }
@@ -421,5 +469,17 @@ export default {
 
 .addMessageButtonStyle {
   background-color: #fff;
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.25s;
+  color: $color;
+  &:hover,
+  &:focus {
+    color: #fff;
+    box-shadow: inset 6.5em 0 0 0 $color;
+  }
 }
 </style>
