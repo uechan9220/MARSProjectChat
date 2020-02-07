@@ -7,6 +7,7 @@
           <!-- stampの場合 -->
           <div v-if="data.stampFlag == 1">
             <div class="chatNameAndTextBox chatNameAndTextBoxRight">
+              <p class="accountBoxText">{{ data.name }}</p>
               <img :src="data.stamp" class="stamp" />
             </div>
           </div>
@@ -38,6 +39,7 @@
           <!-- stampの場合 -->
           <div v-if="data.stampFlag == 1">
             <div class="chatNameAndTextBox chatNameAndTextBoxLeft">
+              <p class="accountBoxText">{{ data.name }}</p>
               <img :src="data.stamp" class="stamp" />
             </div>
           </div>
