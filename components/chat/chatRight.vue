@@ -36,6 +36,22 @@
       </div>
     </div>
     <div v-if="roomeName != ''" class="pushMessageBox">
+      <div>
+        <button  @click="openStampModal">スタンプ</button>
+        <stampModal v-if="stampModal" @close="closeStampModal">
+          <h1>hoge</h1>
+          <div>
+            
+          </div>
+          <!-- <p>追加するRoom名</p>
+          <div>
+            <input v-model="roomName" />
+          </div>
+          <template slot="footer">
+            <button @click="addRoom">追加</button>
+          </template> -->
+        </stampModal>
+      </div>
       <textarea type="text" v-model="message" class="pushMessageInput" />
       <button @click="pushMessage" class="addMessageButtonStyle">投稿</button>
     </div>
@@ -48,17 +64,29 @@ import firebase from "firebase";
 
 const db = firebase.firestore();
 
+import stampModal from "~/components/chat/stampModal";
+
 export default {
+  components: {
+    stampModal
+  },
   data() {
     return {
       datas: [],
       roomid: this.$route.params.roomid,
       message: "",
-      roomeName: ""
+      roomeName: "",
+      stampModal: false
     };
   },
   props: ["items"],
   methods: {
+    openStampModal(){
+      this.stampModal = true
+    },
+    closeStampModal(){
+      this.stampModal = false
+    },
     pushMessage() {
       if (this.message != "") {
         db.collection("rooms")
@@ -68,7 +96,8 @@ export default {
             name: this.items.displayName,
             message: this.message,
             photoURL: this.items.photoURL,
-            timestamp: new Date()
+            timestamp: new Date(),
+            imgFlag: 0
           })
           .catch(err => {
             console.llg(err);
@@ -108,8 +137,12 @@ export default {
             res.forEach(doc => {
               this.datas.push(doc.data());
             });
-          }else{
-            this.datas.push({message: "まだ書き込みはない様です。", name: "System Manager", photoURL: ""})
+          } else {
+            this.datas.push({
+              message: "まだ書き込みはない様です。",
+              name: "System Manager",
+              photoURL: ""
+            });
           }
         });
     });
@@ -133,7 +166,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
 .menuButton {
   position: relative;
   display: flex;
@@ -189,7 +221,7 @@ export default {
     height: 90vh;
     background-color: #fff;
     overflow-y: auto;
-    @media screen and(max-width:767px){
+    @media screen and(max-width:767px) {
       height: 83vh;
     }
   }
@@ -317,7 +349,7 @@ export default {
   resize: none;
 }
 
-.addMessageButtonStyle{
+.addMessageButtonStyle {
   background-color: #fff;
 }
 </style>
