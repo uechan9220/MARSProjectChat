@@ -1,6 +1,6 @@
 <template>
   <div class="chatRightBackground">
-    <div class="chatBox">
+    <div class="chatBox" id="chat">
       <div v-for="data in datas" :key="data.id">
         <!-- 投稿したのが自分の時 -->
         <div v-if="data.name == items.displayName" class="chatMyUserBox chatUserBox">
@@ -115,6 +115,7 @@ export default {
     },
     pushStamp(event) {
       console.log(event.target.src);
+      const chatLog = document.getElementById("chat");
       db.collection("rooms")
         .doc(this.roomeName)
         .collection("messages")
@@ -143,10 +144,16 @@ export default {
                 this.datas.push(doc.data());
               });
             })
+            .then(() => {
+              setTimeout(() => {
+                chatLog.scrollTop = chatLog.scrollHeight;
+              }, 100);
+            })
         );
     },
     pushMessage() {
       if (this.message != "") {
+        const chatLog = document.getElementById("chat");
         db.collection("rooms")
           .doc(this.roomeName)
           .collection("messages")
@@ -175,6 +182,11 @@ export default {
                   this.datas.push(doc.data());
                 });
               })
+              .then(() => {
+                setTimeout(() => {
+                  chatLog.scrollTop = chatLog.scrollHeight;
+                }, 100);
+              })
           );
       } else {
         alert("メッセージを入力してください");
@@ -183,6 +195,7 @@ export default {
   },
   created() {
     this.$nuxt.$on("hoge", data => {
+      const chatLog = document.getElementById("chat");
       this.roomeName = "";
       this.roomeName = data;
       this.datas = [];
@@ -203,21 +216,13 @@ export default {
               photoURL: ""
             });
           }
+        })
+        .then(() => {
+          setTimeout(() => {
+            chatLog.scrollTop = chatLog.scrollHeight;
+          }, 100);
         });
     });
-  },
-  mounted() {
-    // db.collection("rooms")
-    //   .doc("golang")
-    //   .collection("messages")
-    //   .get()
-    //   .then(res => {
-    //     res.forEach(doc => {
-    //       this.datas.push(doc.data());
-    //     });
-    //   });
-    console.log(this.datas);
-    console.log(this.items);
   }
 };
 </script>
@@ -473,9 +478,11 @@ $color: #1aab8a;
   background-color: #fff;
   border: 2px solid;
   font: inherit;
+  @media screen and(min-width: 768px) {
+    margin: 0.5em;
+    padding: 1em 2em;
+  }
   line-height: 1;
-  margin: 0.5em;
-  padding: 1em 2em;
   transition: 0.25s;
   color: $color;
   &:hover,
