@@ -4,7 +4,7 @@
       <img class="accountBoxImage" :src="items.photoURL" />
       <div class="accountTextBox">
         <p class="accountBoxText">{{ items.displayName }}</p>
-        <p>Administrator</p>
+        <p>Guest</p>
       </div>
     </div>
     <Rooms />
