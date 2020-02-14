@@ -3,7 +3,10 @@
     <div class="chatBox" id="chat">
       <div v-for="data in datas" :key="data.id">
         <!-- 投稿したのが自分の時 -->
-        <div v-if="data.name == items.displayName" class="chatMyUserBox chatUserBox">
+        <div
+          v-if="data.name == items.displayName"
+          class="chatMyUserBox chatUserBox"
+        >
           <!-- stampの場合 -->
           <div v-if="data.stampFlag == 1">
             <div class="chatNameAndTextBox chatNameAndTextBoxRight">
@@ -20,7 +23,7 @@
               </div>
             </div>
           </div>
-          <div v-if="data.photoURL ==  ''">
+          <div v-if="data.photoURL == ''">
             <img src="~/assets/images/guest.svg" />
           </div>
           <div v-else>
@@ -30,7 +33,7 @@
 
         <!-- 投稿したのが他人の場合 -->
         <div v-else class="chatUserBox">
-          <div v-if="data.photoURL ==  ''">
+          <div v-if="data.photoURL == ''">
             <img src="~/assets/images/guest.svg" />
           </div>
           <div v-else>
@@ -72,7 +75,6 @@
   </div>
 </template>
 
-
 <script>
 import firebase from "firebase";
 
@@ -84,6 +86,10 @@ import stamp02 from "@/assets/images/stamp/stamp02.png";
 import stamp03 from "@/assets/images/stamp/stamp03.png";
 import stamp04 from "@/assets/images/stamp/stamp04.png";
 import stamp05 from "@/assets/images/stamp/stamp05.png";
+import stamp06 from "@/assets/images/stamp/stamp06.png";
+import stamp07 from "@/assets/images/stamp/stamp07.png";
+import stamp08 from "@/assets/images/stamp/stamp08.png";
+import stamp09 from "@/assets/images/stamp/stamp09.png";
 
 export default {
   components: {
@@ -101,7 +107,11 @@ export default {
         { stamp: stamp02 },
         { stamp: stamp03 },
         { stamp: stamp04 },
-        { stamp: stamp05 }
+        { stamp: stamp05 },
+        { stamp: stamp06 },
+        { stamp: stamp07 },
+        { stamp: stamp08 },
+        { stamp: stamp09 }
       ]
     };
   },
@@ -226,8 +236,6 @@ export default {
   }
 };
 </script>
-
-
 
 <style lang="scss" scoped>
 $color: #1aab8a;
@@ -478,10 +486,6 @@ $color: #1aab8a;
   background-color: #fff;
   border: 2px solid;
   font: inherit;
-  @media screen and(min-width: 768px) {
-    margin: 0.5em;
-    padding: 1em 2em;
-  }
   line-height: 1;
   transition: 0.25s;
   color: $color;
