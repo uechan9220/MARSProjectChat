@@ -51,8 +51,8 @@ export default {
   },
 
   manifest: {
-    name: "MARSProjectChatAPP",
-    short_name: "MARSProjectChatAPP",
+    name: "CTAS",
+    short_name: "CATS",
     description: "マーズで使うchatAppのモック",
     start_url: "/",
     display: "fullscreen",

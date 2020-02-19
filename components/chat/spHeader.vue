@@ -6,7 +6,7 @@
       <div class="spinner horizontal"></div>
       <div class="spinner diagonal part-2"></div>
     </label>
-    <p class="spHeaderTitle">MARSProject</p>
+    <p class="spHeaderTitle">CTAS</p>
     <spChatLeft :items="items" />
   </div>
 </template>

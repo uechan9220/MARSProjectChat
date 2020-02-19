@@ -3,8 +3,7 @@
     <video id="bg-video" src="~/assets/videos/example.mp4" type="video/mp4" autoplay loop></video>
     <div class="loginContent">
       <div class="loginContentText">
-        <p>MARS</p>
-        <p>PROJECT</p>
+        <p>CATS</p>
       </div>
       <div class="loginButtonBox">
         <div>
